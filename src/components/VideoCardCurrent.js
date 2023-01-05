@@ -9,6 +9,7 @@ import {
   Stack,
   Box,
   Avatar,
+  Modal,
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -20,6 +21,8 @@ import album4 from "../images/Brutxxl.webp";
 import album5 from "../images/SuaveG.jpg";
 import album6 from "../images/BABAGUY.jpeg";
 import album7 from "../images/180Remix.webp";
+import album8 from "../images/NietVoorDeViews.jpeg";
+import { ModalLostGame } from "./ModalLostGame";
 
 export const VideoCardCurrent = () => {
   const [currentSong, setCurrentSong] = useState(
@@ -32,6 +35,7 @@ export const VideoCardCurrent = () => {
   const [highScore, setHighScore] = useState(0);
   const [currentSongBackground, setCurrentSongBackground] = useState("");
   const [nextSongBackground, setNextSongBackground] = useState("");
+  const [display, setDisplay] = useState("none");
 
   const getRandomSong = () => {
     const randomIndex = Math.floor(Math.random() * songData.length);
@@ -52,7 +56,7 @@ export const VideoCardCurrent = () => {
     } else {
       /* Losing animation */
 
-      document.getElementById("avatar").classList.add = "failure";
+      setDisplay("none");
       if (score > highScore) {
         setHighScore(score);
         setScore(0);
@@ -62,24 +66,24 @@ export const VideoCardCurrent = () => {
   };
 
   const checkOutcomeLower = () => {
+    console.log(parseFloat(currentSong.views));
+    console.log(parseFloat(nextSong.views));
     if (parseInt(currentSong.views) >= parseInt(nextSong.views)) {
       /* Winning Animation */
-      document.getElementById("avatar").classList.add = "success";
+
       setScore(score + 1);
       getRandomSong();
       changeSongBackground(currentSong, nextSong);
     } else {
       /* Losing animation */
-      document.getElementById("avatar").classList.add = "failure";
+
+      setDisplay("none");
       if (score > highScore) {
         setHighScore(score);
         setScore(0);
       }
       setScore(0);
     }
-  };
-  const initiateGame = () => {
-    changeSongBackground(currentSong, nextSong);
   };
 
   const changeSongBackground = (current, next) => {
@@ -104,6 +108,9 @@ export const VideoCardCurrent = () => {
         break;
       case "7":
         setCurrentSongBackground(album7);
+        break;
+      case "8":
+        setCurrentSongBackground(album8);
         break;
       default:
         setCurrentSongBackground("");
@@ -130,14 +137,19 @@ export const VideoCardCurrent = () => {
       case "7":
         setNextSongBackground(album7);
         break;
+      case "8":
+        setNextSongBackground(album8);
+        break;
       default:
         setNextSongBackground("");
     }
   };
 
   useEffect(() => {
-    initiateGame();
-  }, [score]);
+    changeSongBackground(currentSong, nextSong);
+    console.log("run useffect");
+  }, []);
+
   return (
     <Box
       key={Math.random()}
@@ -152,6 +164,7 @@ export const VideoCardCurrent = () => {
       }}
     >
       <Box
+        key={Math.random()}
         sx={{
           position: "absolute",
           left: "0px",
@@ -307,6 +320,7 @@ export const VideoCardCurrent = () => {
         <Typography variant="h4">Score: {score}</Typography>
         <Typography variant="h4">Highscore: {highScore}</Typography>
       </Stack>
+      <ModalLostGame score={score} highScore={highScore} display={display} />
     </Box>
   );
 };
