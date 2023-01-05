@@ -8,14 +8,30 @@ import {
   Button,
   Stack,
   Box,
+  Avatar,
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import album1 from "../images/Zwangerschapsverlofv3.jpeg";
+import album2 from "../images/WieIsGuy.jpeg";
+import album3 from "../images/Brutaal.jpeg";
+import album4 from "../images/Brutxxl.webp";
+import album5 from "../images/SuaveG.jpg";
+import album6 from "../images/BABAGUY.jpeg";
+import album7 from "../images/180Remix.webp";
 
 export const VideoCardCurrent = () => {
-  const [currentSong, setCurrentSong] = useState({});
-  const [nextSong, setNextSong] = useState({});
+  const [currentSong, setCurrentSong] = useState(
+    songData[Math.floor(Math.random() * songData.length - 1)]
+  );
+  const [nextSong, setNextSong] = useState(
+    songData[Math.floor(Math.random() * songData.length - 1)]
+  );
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [currentSongBackground, setCurrentSongBackground] = useState("");
+  const [nextSongBackground, setNextSongBackground] = useState("");
 
   const getRandomSong = () => {
     const randomIndex = Math.floor(Math.random() * songData.length);
@@ -28,35 +44,111 @@ export const VideoCardCurrent = () => {
       setNextSong(songData[randomIndex + 1]);
     }
   };
+  const checkOutcomeHigher = () => {
+    if (parseInt(nextSong.views) >= parseInt(currentSong.views)) {
+      setScore(score + 1);
+      getRandomSong();
+      changeSongBackground(currentSong, nextSong);
+    } else {
+      /* Losing animation */
 
-  const checkOutcome = () => {};
+      document.getElementById("avatar").classList.add = "failure";
+      if (score > highScore) {
+        setHighScore(score);
+        setScore(0);
+      }
+      setScore(0);
+    }
+  };
+
+  const checkOutcomeLower = () => {
+    if (parseInt(currentSong.views) >= parseInt(nextSong.views)) {
+      /* Winning Animation */
+      document.getElementById("avatar").classList.add = "success";
+      setScore(score + 1);
+      getRandomSong();
+      changeSongBackground(currentSong, nextSong);
+    } else {
+      /* Losing animation */
+      document.getElementById("avatar").classList.add = "failure";
+      if (score > highScore) {
+        setHighScore(score);
+        setScore(0);
+      }
+      setScore(0);
+    }
+  };
+  const initiateGame = () => {
+    changeSongBackground(currentSong, nextSong);
+  };
+
+  const changeSongBackground = (current, next) => {
+    switch (current.thumbnail) {
+      case "1":
+        setCurrentSongBackground(album1);
+        break;
+      case "2":
+        setCurrentSongBackground(album2);
+        break;
+      case "3":
+        setCurrentSongBackground(album3);
+        break;
+      case "4":
+        setCurrentSongBackground(album4);
+        break;
+      case "5":
+        setCurrentSongBackground(album5);
+        break;
+      case "6":
+        setCurrentSongBackground(album6);
+        break;
+      case "7":
+        setCurrentSongBackground(album7);
+        break;
+      default:
+        setCurrentSongBackground("");
+    }
+    switch (next.thumbnail) {
+      case "1":
+        setNextSongBackground(album1);
+        break;
+      case "2":
+        setNextSongBackground(album2);
+        break;
+      case "3":
+        setNextSongBackground(album3);
+        break;
+      case "4":
+        setNextSongBackground(album4);
+        break;
+      case "5":
+        setNextSongBackground(album5);
+        break;
+      case "6":
+        setNextSongBackground(album6);
+        break;
+      case "7":
+        setNextSongBackground(album7);
+        break;
+      default:
+        setNextSongBackground("");
+    }
+  };
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * songData.length);
-    const randomIndex2 = Math.floor(Math.random() * songData.length);
-
-    setCurrentSong(songData[0]);
-
-    if (randomIndex !== randomIndex2) {
-      setNextSong(songData[randomIndex2]);
-    } else if (randomIndex2 > 0) {
-      setNextSong(songData[randomIndex2 - 1]);
-    } else {
-      setNextSong(songData[randomIndex2 + 1]);
-    }
-  }, []);
-
-  console.log(songData);
+    initiateGame();
+  }, [score]);
   return (
     <Box
+      key={Math.random()}
+      className="smooth-anim-left-in"
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        background: "transparent",
-        bgcolor: "#E3E3E3",
         zIndex: 0,
+        textShadow: "2px 2px 4px #000000",
       }}
     >
       <Box
@@ -67,87 +159,153 @@ export const VideoCardCurrent = () => {
           zIndex: 1,
           width: "50vw",
           height: "100vh",
-          border: "1px solid black",
-        }}
-      ></Box>
-      <Box></Box>
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          marginRight: "10vh",
-          marginTop: "10vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundImage: `url(${currentSongBackground})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        <Typography variant="h1">{score}</Typography>
-      </Box>
-      <Stack direction={"row"} spacing={4}>
         <Card
+          className="smooth-anim-fade-in"
           variant="outlined"
           sx={{
-            maxHeight: "200px",
-            minWidth: "200px",
-            maxWidth: "30vw",
+            height: "50vh",
+            minWidth: "300px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            border: "1px solid black",
+            background: "transparent",
+            border: "none",
             zIndex: 2,
-            backgroundImage: `url(../images/bg-1.png)`,
+            color: "white",
           }}
           key={currentSong.id}
         >
           <CardContent>
-            <Typography variant="h6" component={"div"}>
-              {currentSong.title}
+            <Typography variant="h3" component={"div"}>
+              "{currentSong.title}"
             </Typography>
-            <Typography>{currentSong.views}</Typography>
+            <Typography>has</Typography>
+            <Typography variant="h1" color={"warning.light"}>
+              {currentSong.views}
+            </Typography>
+            <Typography>total streams</Typography>
           </CardContent>
-          <CardActions>
-            <Button variant="contained" color="success">
-              <ArrowUpwardIcon />
-              Higher
-            </Button>
-            <Button variant="contained" color="error" onClick={getRandomSong}>
-              Lower
-              <ArrowDownwardIcon />
-            </Button>
-          </CardActions>
         </Card>
+      </Box>
+      <Avatar sx={{ zIndex: 5, height: "100px", width: "100px" }} id="avatar">
+        <CompareArrowsIcon
+          fontSize="large"
+          sx={{ height: "75px", width: "75px" }}
+        />
+      </Avatar>
+      <Box
+        key={Math.random()}
+        className="smooth-anim-scale-in"
+        sx={{
+          position: "absolute",
+          left: "50vw",
+          top: "0px",
+          zIndex: 1,
+          width: "50vw",
+          height: "100vh",
+
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundImage: `url(${nextSongBackground})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <Card
+          className="smooth-anim-fade-in"
           variant="outlined"
           sx={{
-            maxHeight: "200px",
-            minWidth: "200px",
-            maxWidth: "30vw",
+            height: "50vh",
+            minWidth: "300px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            border: "1px solid black",
+            background: "transparent",
+            border: "none",
             zIndex: 2,
+            color: "white",
           }}
           key={nextSong.id}
         >
           <CardContent>
-            <Typography variant="h6" component={"div"}>
-              {nextSong.title}
+            <Typography variant="h3" component={"div"}>
+              "{nextSong.title}"
             </Typography>
-            <Typography>{nextSong.views}</Typography>
+            <Typography variant="h5">has</Typography>
+            <CardActions
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              <Button
+                variant="outlined"
+                onClick={() => checkOutcomeHigher()}
+                sx={{
+                  width: "15vw",
+                  borderRadius: "20px",
+                  color: "white",
+                  border: "1px solid white",
+                }}
+              >
+                <ArrowUpwardIcon />
+                Higher
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => checkOutcomeLower()}
+                sx={{
+                  width: "15vw",
+                  borderRadius: "20px",
+                  color: "white",
+                  border: "1px solid white",
+                }}
+              >
+                Lower
+                <ArrowDownwardIcon />
+              </Button>
+            </CardActions>
+            <Typography
+              sx={{
+                textShadow: "2px 2px 4px #000000",
+              }}
+            >
+              streams than "<i>{currentSong.title}"</i>
+            </Typography>
           </CardContent>
-          <CardActions>
-            <Button variant="contained" color="success">
-              <ArrowUpwardIcon />
-              Higher
-            </Button>
-            <Button variant="contained" color="error" onClick={getRandomSong}>
-              Lower
-              <ArrowDownwardIcon />
-            </Button>
-          </CardActions>
         </Card>
+      </Box>
+      <Stack
+        direction={"row"}
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          width: "94vw",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          left: 0,
+          textAlign: "left",
+          zIndex: 4,
+          color: "white",
+          padding: "3rem",
+          textShadow: "2px 2px 4px #000000",
+        }}
+      >
+        <Typography variant="h4">Score: {score}</Typography>
+        <Typography variant="h4">Highscore: {highScore}</Typography>
       </Stack>
     </Box>
   );

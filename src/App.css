@@ -1,38 +1,58 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.smooth-anim-fade-in {
+    animation: smooth-fade-in 1s forwards;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.smooth-anim-scale-in {
+    animation: smooth-scale-in 1s forwards;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.smooth-anim-left-in {
+    animation: smooth-left-in 1s forwards;
 }
 
-.App-link {
-  color: #61dafb;
+.success {
+    animation: success 1s forwards;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes success {
+    0% {
+        background-color: inherit;
+    }
+    100% {
+        background-color: green;
+    }
+}
+
+@keyframes smooth-fade-in {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes smooth-scale-in {
+    0% {
+        transform: scale(0.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes smooth-left-in {
+    0% {
+        transform: translateX(50vw);
+    }
+    100% {
+        transform: translate(0);
+    }
 }
