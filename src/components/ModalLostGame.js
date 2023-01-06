@@ -1,4 +1,11 @@
-import { Typography, Paper, ButtonGroup, IconButton, Box } from "@mui/material";
+import {
+  Typography,
+  Paper,
+  ButtonGroup,
+  IconButton,
+  Box,
+  Stack,
+} from "@mui/material";
 import React from "react";
 import {
   FacebookIcon,
@@ -66,40 +73,68 @@ export const ModalLostGame = ({
         >
           Play again
         </IconButton>
-        <ButtonGroup>
-          <FacebookMessengerShareButton
-            url="daemne.github.io/portfolio"
-            title={quote}
-            windowHeight={"10000"}
-            windowWidth={"10000"}
+        <Stack spacing={4} direction={"row"}>
+          <Stack
+            sx={{
+              "&:hover": { transform: "scale(1.3)", transition: "all 1s" },
+            }}
           >
-            <FacebookMessengerIcon size={32} round />
-          </FacebookMessengerShareButton>
-          <TwitterShareButton
-            url="daemne.github.io/portfolio"
-            title={quote}
-            windowHeight={"10000"}
-            windowWidth={"10000"}
+            <FacebookMessengerShareButton
+              url="daemne.github.io/portfolio"
+              title={quote}
+              windowHeight={"10000"}
+              windowWidth={"10000"}
+            >
+              <FacebookMessengerIcon size={32} round />
+            </FacebookMessengerShareButton>
+            <Typography>Facebook</Typography>
+          </Stack>
+          <Stack
+            sx={{
+              "&:hover": { transform: "scale(1.3)", transition: "all 1s" },
+            }}
           >
-            <TwitterIcon size={32} round />
-          </TwitterShareButton>
-          <RedditShareButton
-            url="daemne.github.io/portfolio"
-            title={quote}
-            windowHeight={"10000"}
-            windowWidth={"10000"}
+            <TwitterShareButton
+              url="daemne.github.io/portfolio"
+              title={quote}
+              windowHeight={"10000"}
+              windowWidth={"10000"}
+            >
+              <TwitterIcon size={32} round />
+            </TwitterShareButton>
+            <Typography>Twitter</Typography>
+          </Stack>
+          <Stack
+            sx={{
+              "&:hover": { transform: "scale(1.3)", transition: "all 1s" },
+            }}
           >
-            <RedditIcon size={32} round />
-          </RedditShareButton>
-          <WhatsappShareButton
-            url="daemne.github.io/portfolio"
-            title={quote}
-            windowHeight={"10000"}
-            windowWidth={"10000"}
+            <RedditShareButton
+              url="daemne.github.io/portfolio"
+              title={quote}
+              windowHeight={"10000"}
+              windowWidth={"10000"}
+            >
+              <RedditIcon size={32} round />
+            </RedditShareButton>
+            <Typography>Reddit</Typography>
+          </Stack>
+          <Stack
+            sx={{
+              "&:hover": { transform: "scale(1.3)", transition: "all 1s" },
+            }}
           >
-            <WhatsappIcon size={32} round />
-          </WhatsappShareButton>
-        </ButtonGroup>
+            <WhatsappShareButton
+              url="daemne.github.io/portfolio"
+              title={quote}
+              windowHeight={"10000"}
+              windowWidth={"10000"}
+            >
+              <WhatsappIcon size={32} round />
+            </WhatsappShareButton>
+            <Typography>Whatsapp</Typography>
+          </Stack>
+        </Stack>
       </Paper>
     </Box>
   );

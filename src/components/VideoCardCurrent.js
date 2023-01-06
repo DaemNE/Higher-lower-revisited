@@ -9,10 +9,14 @@ import {
   Stack,
   Box,
   Avatar,
+  Icon,
+  ImageListItem,
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import CloseIcon from "@mui/icons-material/Close";
+import { Check, Image } from "@mui/icons-material";
 import album1 from "../images/Zwangerschapsverlofv3.jpeg";
 import album2 from "../images/WieIsGuy.jpeg";
 import album3 from "../images/Brutaal.jpeg";
@@ -22,6 +26,7 @@ import album6 from "../images/BABAGUY.jpeg";
 import album7 from "../images/180Remix.webp";
 import album8 from "../images/NietVoorDeViews.jpeg";
 import album9 from "../images/pourriture-noble.jpg";
+import title from "../images/Title.webp";
 import { ModalLostGame } from "./ModalLostGame";
 
 export const VideoCardCurrent = () => {
@@ -39,8 +44,7 @@ export const VideoCardCurrent = () => {
   const [displayTwo, setDisplayTwo] = useState("flex");
   const [displayViewsRight, setDisplayViewsRight] = useState("none");
   const [displayButtons, setDisplayButtons] = useState("inline-flex");
-  const [calculatedViews, setCalculatedViews] = useState(0);
-  const [increment, setIncrement] = useState(0);
+  const [avatarDisplay, setAvatarDisplay] = useState("main");
 
   const getRandomSong = () => {
     const randomIndex = Math.floor(Math.random() * songData.length);
@@ -69,27 +73,29 @@ export const VideoCardCurrent = () => {
     if (parseInt(nextSong.views) >= parseInt(currentSong.views)) {
       setDisplayButtons("none");
       setDisplayViewsRight("");
+      setAvatarDisplay("win");
       setTimeout(() => {
         setScore(score + 1);
         setDisplayButtons("inline-flex");
         getRandomSong();
         changeSongBackground(currentSong, nextSong);
         setDisplayViewsRight("none");
-        setCalculatedViews(0);
+        setAvatarDisplay("main");
       }, 1999);
     } else {
       /* Losing animation */
 
       setDisplayButtons("none");
       setDisplayViewsRight("");
+      setAvatarDisplay("fail");
 
       setTimeout(() => {
         setDisplay("flex");
         setDisplayButtons("inline-flex");
         setDisplayTwo("none");
         setDisplayViewsRight("none");
+        setAvatarDisplay("main");
 
-        setCalculatedViews(0);
         if (score > highScore) {
           setHighScore(score);
         }
@@ -102,6 +108,7 @@ export const VideoCardCurrent = () => {
       /* Winning Animation */
       setDisplayButtons("none");
       setDisplayViewsRight("");
+      setAvatarDisplay("win");
 
       setTimeout(() => {
         setScore(score + 1);
@@ -109,22 +116,22 @@ export const VideoCardCurrent = () => {
         setDisplayButtons("inline-flex");
         changeSongBackground(currentSong, nextSong);
         setDisplayViewsRight("none");
-
-        setCalculatedViews(0);
+        setAvatarDisplay("main");
       }, 1999);
     } else {
       /* Losing animation */
 
       setDisplayButtons("none");
       setDisplayViewsRight("");
+      setAvatarDisplay("fail");
 
       setTimeout(() => {
         setDisplay("flex");
         setDisplayTwo("none");
         setDisplayButtons("inline-flex");
         setDisplayViewsRight("none");
+        setAvatarDisplay("main");
 
-        setCalculatedViews(0);
         if (score > highScore) {
           setHighScore(score);
         }
@@ -199,7 +206,6 @@ export const VideoCardCurrent = () => {
 
   useEffect(() => {
     changeSongBackground(currentSong, nextSong);
-    console.log("useffect called");
   }, [currentSong, nextSong]);
 
   return (
@@ -210,7 +216,7 @@ export const VideoCardCurrent = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "95vh",
         zIndex: 0,
         textShadow: "2px 2px 4px #000000",
       }}
@@ -223,7 +229,7 @@ export const VideoCardCurrent = () => {
           top: "0px",
           zIndex: 1,
           width: "50vw",
-          height: "100vh",
+          height: "95vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -251,7 +257,9 @@ export const VideoCardCurrent = () => {
         >
           <CardContent>
             <Typography variant="h3" component={"div"}>
-              "{currentSong.title}"
+              <u>
+                <b>"{currentSong.title}"</b>
+              </u>
             </Typography>
             <Typography>has</Typography>
             <Typography variant="h1" color={"warning.light"}>
@@ -271,11 +279,28 @@ export const VideoCardCurrent = () => {
         id="avatar"
         key={Math.random()}
       >
-        <CompareArrowsIcon
-          color="success"
-          fontSize="large"
-          sx={{ height: "75px", width: "75px" }}
-        />
+        {avatarDisplay === "win" ? (
+          <Check
+            className={"smooth-anim-fill-success"}
+            color="success"
+            fontSize="large"
+            sx={{ height: "100px", width: "100px" }}
+          />
+        ) : avatarDisplay === "fail" ? (
+          <CloseIcon
+            className={"smooth-anim-fill-fail"}
+            color="error"
+            fontSize="large"
+            sx={{ height: "100px", width: "100px" }}
+          />
+        ) : (
+          <CompareArrowsIcon
+            className={"smooth-anim-fill-main"}
+            color="primary"
+            fontSize="large"
+            sx={{ height: "100px", width: "100px", zIndex: 5 }}
+          ></CompareArrowsIcon>
+        )}
       </Avatar>
       <Box
         key={score + 2}
@@ -286,7 +311,7 @@ export const VideoCardCurrent = () => {
           top: "0px",
           zIndex: 1,
           width: "50vw",
-          height: "100vh",
+          height: "95vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -314,7 +339,9 @@ export const VideoCardCurrent = () => {
         >
           <CardContent>
             <Typography variant="h3" component={"div"}>
-              "{nextSong.title}"
+              <u>
+                <b>"{nextSong.title}"</b>
+              </u>
             </Typography>
             <Typography variant="h5">has</Typography>
             <Box
@@ -343,8 +370,9 @@ export const VideoCardCurrent = () => {
               >
                 <Button
                   key={Math.random()}
-                  variant="outlined"
+                  variant="contained"
                   onClick={() => checkOutcomeHigher()}
+                  color={"warning"}
                   sx={{
                     display: displayButtons,
                     width: "15vw",
@@ -358,7 +386,8 @@ export const VideoCardCurrent = () => {
                 </Button>
                 <Button
                   key={Math.random()}
-                  variant="outlined"
+                  variant="contained"
+                  color="secondary"
                   onClick={() => checkOutcomeLower()}
                   sx={{
                     display: displayButtons,

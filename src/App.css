@@ -19,6 +19,42 @@
     animation: success 1s forwards;
 }
 
+.smooth-anim-fill-success {
+    animation: fill-success 2s forwards;
+}
+
+.smooth-anim-fill-fail {
+    animation: fill-fail 2s forwards;
+}
+
+@keyframes fill-fail {
+    0% {
+        opacity: 0;
+        background-color: rgba(191, 98, 98, 0);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        background-color: rgb(191, 98, 98, 1);
+    }
+}
+
+@keyframes fill-success {
+    0% {
+        opacity: 0;
+        background-color: rgba(94, 203, 94, 0);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        background-color: rgba(94, 203, 94, 1);
+    }
+}
+
 @keyframes success {
     0% {
         background-color: inherit;
