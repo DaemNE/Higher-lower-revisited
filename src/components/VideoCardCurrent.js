@@ -9,7 +9,6 @@ import {
   Stack,
   Box,
   Avatar,
-  Modal,
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -22,6 +21,7 @@ import album5 from "../images/SuaveG.jpg";
 import album6 from "../images/BABAGUY.jpeg";
 import album7 from "../images/180Remix.webp";
 import album8 from "../images/NietVoorDeViews.jpeg";
+import album9 from "../images/pourriture-noble.jpg";
 import { ModalLostGame } from "./ModalLostGame";
 
 export const VideoCardCurrent = () => {
@@ -36,6 +36,7 @@ export const VideoCardCurrent = () => {
   const [currentSongBackground, setCurrentSongBackground] = useState("");
   const [nextSongBackground, setNextSongBackground] = useState("");
   const [display, setDisplay] = useState("none");
+  const [displayTwo, setDisplayTwo] = useState("block");
 
   const getRandomSong = () => {
     const randomIndex = Math.floor(Math.random() * songData.length);
@@ -56,7 +57,8 @@ export const VideoCardCurrent = () => {
     } else {
       /* Losing animation */
 
-      setDisplay("none");
+      setDisplay("flex");
+      setDisplayTwo("none");
       if (score > highScore) {
         setHighScore(score);
         setScore(0);
@@ -77,7 +79,8 @@ export const VideoCardCurrent = () => {
     } else {
       /* Losing animation */
 
-      setDisplay("none");
+      setDisplay("flex");
+      setDisplayTwo("none");
       if (score > highScore) {
         setHighScore(score);
         setScore(0);
@@ -112,6 +115,9 @@ export const VideoCardCurrent = () => {
       case "8":
         setCurrentSongBackground(album8);
         break;
+      case "9":
+        setCurrentSongBackground(album9);
+        break;
       default:
         setCurrentSongBackground("");
     }
@@ -140,6 +146,9 @@ export const VideoCardCurrent = () => {
       case "8":
         setNextSongBackground(album8);
         break;
+      case "9":
+        setNextSongBackground(album9);
+        break;
       default:
         setNextSongBackground("");
     }
@@ -147,8 +156,7 @@ export const VideoCardCurrent = () => {
 
   useEffect(() => {
     changeSongBackground(currentSong, nextSong);
-    console.log("run useffect");
-  }, []);
+  }, [currentSong, nextSong, display]);
 
   return (
     <Box
@@ -209,8 +217,18 @@ export const VideoCardCurrent = () => {
           </CardContent>
         </Card>
       </Box>
-      <Avatar sx={{ zIndex: 5, height: "100px", width: "100px" }} id="avatar">
+      <Avatar
+        sx={{
+          zIndex: 5,
+          height: "100px",
+          width: "100px",
+          display: { displayTwo },
+        }}
+        id="avatar"
+        key={Math.random()}
+      >
         <CompareArrowsIcon
+          color="success"
           fontSize="large"
           sx={{ height: "75px", width: "75px" }}
         />
