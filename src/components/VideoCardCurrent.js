@@ -36,7 +36,11 @@ export const VideoCardCurrent = () => {
   const [currentSongBackground, setCurrentSongBackground] = useState("");
   const [nextSongBackground, setNextSongBackground] = useState("");
   const [display, setDisplay] = useState("none");
-  const [displayTwo, setDisplayTwo] = useState("block");
+  const [displayTwo, setDisplayTwo] = useState("flex");
+  const [displayViewsRight, setDisplayViewsRight] = useState("none");
+  const [displayButtons, setDisplayButtons] = useState("inline-flex");
+  const [calculatedViews, setCalculatedViews] = useState(0);
+  const [increment, setIncrement] = useState(0);
 
   const getRandomSong = () => {
     const randomIndex = Math.floor(Math.random() * songData.length);
@@ -49,43 +53,82 @@ export const VideoCardCurrent = () => {
       setNextSong(songData[randomIndex + 1]);
     }
   };
+
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const restartGame = () => {
+    setDisplay("none");
+    setDisplayTwo("flex");
+    setScore(0);
+    getRandomSong();
+  };
+
   const checkOutcomeHigher = () => {
     if (parseInt(nextSong.views) >= parseInt(currentSong.views)) {
-      setScore(score + 1);
-      getRandomSong();
-      changeSongBackground(currentSong, nextSong);
+      setDisplayButtons("none");
+      setDisplayViewsRight("");
+      setTimeout(() => {
+        setScore(score + 1);
+        setDisplayButtons("inline-flex");
+        getRandomSong();
+        changeSongBackground(currentSong, nextSong);
+        setDisplayViewsRight("none");
+        setCalculatedViews(0);
+      }, 1999);
     } else {
       /* Losing animation */
 
-      setDisplay("flex");
-      setDisplayTwo("none");
-      if (score > highScore) {
-        setHighScore(score);
-        setScore(0);
-      }
-      setScore(0);
+      setDisplayButtons("none");
+      setDisplayViewsRight("");
+
+      setTimeout(() => {
+        setDisplay("flex");
+        setDisplayButtons("inline-flex");
+        setDisplayTwo("none");
+        setDisplayViewsRight("none");
+
+        setCalculatedViews(0);
+        if (score > highScore) {
+          setHighScore(score);
+        }
+      }, 1999);
     }
   };
 
   const checkOutcomeLower = () => {
-    console.log(parseFloat(currentSong.views));
-    console.log(parseFloat(nextSong.views));
     if (parseInt(currentSong.views) >= parseInt(nextSong.views)) {
       /* Winning Animation */
+      setDisplayButtons("none");
+      setDisplayViewsRight("");
 
-      setScore(score + 1);
-      getRandomSong();
-      changeSongBackground(currentSong, nextSong);
+      setTimeout(() => {
+        setScore(score + 1);
+        getRandomSong();
+        setDisplayButtons("inline-flex");
+        changeSongBackground(currentSong, nextSong);
+        setDisplayViewsRight("none");
+
+        setCalculatedViews(0);
+      }, 1999);
     } else {
       /* Losing animation */
 
-      setDisplay("flex");
-      setDisplayTwo("none");
-      if (score > highScore) {
-        setHighScore(score);
-        setScore(0);
-      }
-      setScore(0);
+      setDisplayButtons("none");
+      setDisplayViewsRight("");
+
+      setTimeout(() => {
+        setDisplay("flex");
+        setDisplayTwo("none");
+        setDisplayButtons("inline-flex");
+        setDisplayViewsRight("none");
+
+        setCalculatedViews(0);
+        if (score > highScore) {
+          setHighScore(score);
+        }
+      }, 1999);
     }
   };
 
@@ -156,11 +199,12 @@ export const VideoCardCurrent = () => {
 
   useEffect(() => {
     changeSongBackground(currentSong, nextSong);
-  }, [currentSong, nextSong, display]);
+    console.log("useffect called");
+  }, [currentSong, nextSong]);
 
   return (
     <Box
-      key={Math.random()}
+      key={score}
       className="smooth-anim-left-in"
       sx={{
         display: "flex",
@@ -172,7 +216,7 @@ export const VideoCardCurrent = () => {
       }}
     >
       <Box
-        key={Math.random()}
+        key={score + 1}
         sx={{
           position: "absolute",
           left: "0px",
@@ -211,7 +255,7 @@ export const VideoCardCurrent = () => {
             </Typography>
             <Typography>has</Typography>
             <Typography variant="h1" color={"warning.light"}>
-              {currentSong.views}
+              {numberWithCommas(currentSong.views)}
             </Typography>
             <Typography>total streams</Typography>
           </CardContent>
@@ -222,7 +266,7 @@ export const VideoCardCurrent = () => {
           zIndex: 5,
           height: "100px",
           width: "100px",
-          display: { displayTwo },
+          display: displayTwo,
         }}
         id="avatar"
         key={Math.random()}
@@ -234,7 +278,7 @@ export const VideoCardCurrent = () => {
         />
       </Avatar>
       <Box
-        key={Math.random()}
+        key={score + 2}
         className="smooth-anim-scale-in"
         sx={{
           position: "absolute",
@@ -243,7 +287,6 @@ export const VideoCardCurrent = () => {
           zIndex: 1,
           width: "50vw",
           height: "100vh",
-
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -274,40 +317,62 @@ export const VideoCardCurrent = () => {
               "{nextSong.title}"
             </Typography>
             <Typography variant="h5">has</Typography>
-            <CardActions
+            <Box
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
+                display: displayViewsRight,
+              }}
+              className="smooth-anim-scale-in"
+              key={Math.random()}
+            >
+              <Typography variant="h1" color={"warning.light"}>
+                {numberWithCommas(nextSong.views)}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: displayButtons,
               }}
             >
-              <Button
-                variant="outlined"
-                onClick={() => checkOutcomeHigher()}
+              <CardActions
+                key={Math.random()}
                 sx={{
-                  width: "15vw",
-                  borderRadius: "20px",
-                  color: "white",
-                  border: "1px solid white",
+                  display: displayButtons,
+                  flexDirection: "column",
+                  gap: "10px",
                 }}
               >
-                <ArrowUpwardIcon />
-                Higher
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={() => checkOutcomeLower()}
-                sx={{
-                  width: "15vw",
-                  borderRadius: "20px",
-                  color: "white",
-                  border: "1px solid white",
-                }}
-              >
-                Lower
-                <ArrowDownwardIcon />
-              </Button>
-            </CardActions>
+                <Button
+                  key={Math.random()}
+                  variant="outlined"
+                  onClick={() => checkOutcomeHigher()}
+                  sx={{
+                    display: displayButtons,
+                    width: "15vw",
+                    borderRadius: "20px",
+                    color: "white",
+                    border: "1px solid white",
+                  }}
+                >
+                  <ArrowUpwardIcon />
+                  Higher
+                </Button>
+                <Button
+                  key={Math.random()}
+                  variant="outlined"
+                  onClick={() => checkOutcomeLower()}
+                  sx={{
+                    display: displayButtons,
+                    width: "15vw",
+                    borderRadius: "20px",
+                    color: "white",
+                    border: "1px solid white",
+                  }}
+                >
+                  Lower
+                  <ArrowDownwardIcon />
+                </Button>
+              </CardActions>
+            </Box>
             <Typography
               sx={{
                 textShadow: "2px 2px 4px #000000",
@@ -338,7 +403,12 @@ export const VideoCardCurrent = () => {
         <Typography variant="h4">Score: {score}</Typography>
         <Typography variant="h4">Highscore: {highScore}</Typography>
       </Stack>
-      <ModalLostGame score={score} highScore={highScore} display={display} />
+      <ModalLostGame
+        score={score}
+        highScore={highScore}
+        display={display}
+        restartGame={restartGame}
+      />
     </Box>
   );
 };

@@ -123,7 +123,7 @@ export const songData = [
     id: "18",
     date: "",
     thumbnail: "2",
-    views: "1,100000",
+    views: "1100000",
   },
   {
     title: "Gorik Pt. 1",
