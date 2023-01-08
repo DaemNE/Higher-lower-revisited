@@ -21,7 +21,7 @@ export const Footer = () => {
   return (
     <Box
       sx={{
-        height: "15vh",
+        minHeight: "20vh",
         color: "white",
         padding: "1rem",
         bgcolor: "rgba(226, 226, 226, 0.1)",
@@ -30,7 +30,7 @@ export const Footer = () => {
       <Stack direction={"row"} sx={{ height: "15vh" }} spacing={3}>
         <Stack
           sx={{
-            width: "30vw",
+            minWidth: "30vw",
           }}
         >
           <Typography
@@ -51,7 +51,6 @@ export const Footer = () => {
                 justifyContent: "left",
                 alignItems: "center",
                 paddingLeft: "2rem",
-                fontSize: "",
               }}
             >
               <IconButton>

@@ -8,14 +8,19 @@ import {
 } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export const TimeLineShows = () => {
+  useEffect(() => {
+    Aos.init({ duration: 1000, once: true });
+  }, []);
+
   return (
     <Box
       sx={{
-        bgColor: "rgba(255, 255, 255, 0.4)",
         backgroundColor: "rgba(0, 0, 0, 0.3)",
       }}
     >
@@ -30,7 +35,7 @@ export const TimeLineShows = () => {
         Latest shows since summer 2022
       </Typography>
       <Timeline position="alternate">
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"right"}>
               <img
@@ -68,7 +73,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"left"}>
               <Typography
@@ -106,7 +111,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"right"}>
               <img
@@ -144,7 +149,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"left"}>
               <Typography
@@ -182,7 +187,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"right"}>
               <img
@@ -220,7 +225,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"left"}>
               <Typography
@@ -258,7 +263,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"right"}>
               <img
@@ -296,7 +301,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"left"}>
               <Typography
@@ -334,7 +339,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"right"}>
               <img
@@ -372,7 +377,7 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
 
-        <TimelineItem>
+        <TimelineItem data-aos="slide-up">
           <TimelineOppositeContent>
             <Stack direction={"row"} justifyContent={"left"}>
               <Typography
