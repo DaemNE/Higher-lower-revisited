@@ -1,7 +1,6 @@
 import {
   Box,
   Card,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -34,10 +33,14 @@ export const Hiscores = () => {
       score: "6",
     },
   ];
+
+  mockData.sort((a, b) => {
+    return b.score - a.score;
+  });
   return (
     <Box
       sx={{
-        minHeight: "90vh",
+        height: "85vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -49,8 +52,10 @@ export const Hiscores = () => {
         component={Card}
         sx={{
           background: "transparent",
+          height: "60vh",
           width: "60vw",
           border: "1px solid grey",
+          overflowY: "scroll",
         }}
       >
         <Table sx={{ minWidth: 650 }} size="small" aria-label="hi-scores table">
@@ -61,21 +66,29 @@ export const Hiscores = () => {
                   fontWeight: "bold",
                 }}
               >
-                Name
+                <u>Ranking</u>
               </TableCell>
               <TableCell
                 sx={{
                   fontWeight: "bold",
                 }}
               >
-                HighScore
+                <u>Name</u>
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontWeight: "bold",
+                }}
+              >
+                <u>HighScore</u>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {mockData.map((user) => {
               return (
-                <TableRow key={user.name}>
+                <TableRow key={mockData.indexOf(user) + 1}>
+                  <TableCell>{mockData.indexOf(user) + 1}</TableCell>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.score}</TableCell>
                 </TableRow>
