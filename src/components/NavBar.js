@@ -7,6 +7,9 @@ const navLinkStyles = ({ isActive }) => {
   return {
     fontWeight: isActive ? "bold" : "normal",
     textDecoration: isActive ? "none" : "underline",
+    fontSize: "36px",
+    color: "rgba(0, 0, 0)",
+    padding: "20px",
   };
 };
 
@@ -18,7 +21,7 @@ export const NavBar = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "5vh",
+        bgcolor: "rgba(255, 255, 255, 0.2)",
       }}
       color={"transparent"}
     >

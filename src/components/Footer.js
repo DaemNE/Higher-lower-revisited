@@ -6,8 +6,16 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import ScoreboardIcon from "@mui/icons-material/Scoreboard";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Person } from "@mui/icons-material";
+
+const navLinkStyles = ({ isActive }) => {
+  return {
+    fontWeight: isActive ? "bold" : "normal",
+    textDecoration: isActive ? "none" : "underline",
+    color: "black",
+  };
+};
 
 export const Footer = () => {
   return (
@@ -51,6 +59,7 @@ export const Footer = () => {
               </IconButton>
               <Typography>
                 <NavLink
+                  style={navLinkStyles}
                   to={"/"}
                   onClick={() => {
                     if (window.location.href === "http://localhost:3000/") {
@@ -58,7 +67,7 @@ export const Footer = () => {
                     }
                   }}
                 >
-                  About
+                  Home
                 </NavLink>
               </Typography>
             </Box>
@@ -76,6 +85,7 @@ export const Footer = () => {
               </IconButton>
               <Typography>
                 <NavLink
+                  style={navLinkStyles}
                   to={"/higher-lower"}
                   onClick={() => {
                     if (
@@ -103,6 +113,7 @@ export const Footer = () => {
               </IconButton>
               <Typography>
                 <NavLink
+                  style={navLinkStyles}
                   to={"/hiscores"}
                   onClick={() => {
                     if (
@@ -164,13 +175,22 @@ export const Footer = () => {
                   paddingLeft: "2rem",
                 }}
               >
-                <IconButton>
+                <IconButton
+                  href={"https://www.github.com/daemne"}
+                  target="_blank"
+                >
                   <GitHubIcon fontSize="large" />
                 </IconButton>
                 <Typography
                   sx={{
                     color: "rgba(255, 255, 255, 0.7)",
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
                   }}
+                  component={"a"}
+                  href={"https://www.github.com/daemne"}
+                  target="_blank"
                 >
                   Github
                 </Typography>
@@ -183,13 +203,22 @@ export const Footer = () => {
                   paddingLeft: "2rem",
                 }}
               >
-                <IconButton>
+                <IconButton
+                  href={"https://www.linkedin.com/in/nikolaas-daem-834185123/"}
+                  target="_blank"
+                >
                   <LinkedInIcon fontSize="large" />
                 </IconButton>
                 <Typography
                   sx={{
                     color: "rgba(255, 255, 255, 0.7)",
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
                   }}
+                  component={"a"}
+                  href={"https://www.linkedin.com/in/nikolaas-daem-834185123/"}
+                  target="_blank"
                 >
                   LinkedIn
                 </Typography>
@@ -204,13 +233,22 @@ export const Footer = () => {
                   paddingLeft: "2rem",
                 }}
               >
-                <IconButton>
+                <IconButton
+                  href={"https://www.twitter.com/zwangereguy"}
+                  target="_blank"
+                >
                   <TwitterIcon fontSize="large" />
                 </IconButton>
                 <Typography
                   sx={{
                     color: "rgba(255, 255, 255, 0.7)",
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
                   }}
+                  component={"a"}
+                  href={"https://www.twitter.com/zwangereguy"}
+                  target="_blank"
                 >
                   Twitter
                 </Typography>
@@ -223,13 +261,22 @@ export const Footer = () => {
                   paddingLeft: "2rem",
                 }}
               >
-                <IconButton>
+                <IconButton
+                  href={"https://www.facebook.com/zwangereguy"}
+                  target="_blank"
+                >
                   <FacebookIcon fontSize="large" />
                 </IconButton>
                 <Typography
                   sx={{
                     color: "rgba(255, 255, 255, 0.7)",
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
                   }}
+                  component={"a"}
+                  href={"https://www.facebook.com/zwangereguy"}
+                  target="_blank"
                 >
                   Facebook
                 </Typography>

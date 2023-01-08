@@ -1,5 +1,13 @@
-import { Typography, Paper, IconButton, Box, Stack } from "@mui/material";
-import React from "react";
+import {
+  Typography,
+  Paper,
+  IconButton,
+  Box,
+  Stack,
+  Button,
+  TextField,
+} from "@mui/material";
+import React, { useState } from "react";
 import {
   TwitterIcon,
   RedditIcon,
@@ -12,12 +20,17 @@ import {
 } from "react-share";
 
 export const ModalLostGame = ({ score, highScore, display, restartGame }) => {
+  const [name, setName] = useState("");
   const quote =
-    "Hey, I just got " +
-    score +
-    " with a highscore of " +
+    "Do you want to test your knowledge of zwangere guy's songs? I just played this game and got a highScore of" +
     highScore +
-    ". This game is awesome.";
+    ". You can play this game at: ";
+
+  const submitToHiscores = () => {
+    // post request of current name and score
+    setName("");
+    restartGame();
+  };
   return (
     <Box
       sx={{
@@ -36,7 +49,6 @@ export const ModalLostGame = ({ score, highScore, display, restartGame }) => {
           zIndex: 1,
           bgcolor: "#E3E3E3",
           color: "white",
-
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -56,6 +68,27 @@ export const ModalLostGame = ({ score, highScore, display, restartGame }) => {
         >
           Play again
         </IconButton>
+
+        <Stack direction={"row"} spacing={8}>
+          <TextField
+            variant="outlined"
+            label={"Name"}
+            color={"primary"}
+            sx={{ textShadow: "none" }}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          ></TextField>
+          <Button
+            variant="outlined"
+            sx={{
+              color: "black",
+              border: "1px solid black",
+            }}
+            onClick={submitToHiscores}
+          >
+            Submit to HighScores
+          </Button>
+        </Stack>
 
         <Typography variant="h5">Share your score on</Typography>
         <br />
