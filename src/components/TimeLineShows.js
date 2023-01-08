@@ -6,14 +6,19 @@ import {
   TimelineOppositeContent,
   TimelineSeparator,
 } from "@mui/lab";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
 export const TimeLineShows = () => {
   return (
-    <>
+    <Box
+      sx={{
+        bgColor: "rgba(255, 255, 255, 0.4)",
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+      }}
+    >
       <Typography
         variant="h4"
         component={"div"}
@@ -404,6 +409,6 @@ export const TimeLineShows = () => {
           </TimelineContent>
         </TimelineItem>
       </Timeline>
-    </>
+    </Box>
   );
 };
