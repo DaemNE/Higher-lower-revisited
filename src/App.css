@@ -2,6 +2,22 @@
     scroll-behavior: smooth;
 }
 
+@media (max-width: 1044px) {
+    .App {
+        display: none;
+    }
+}
+
+.mobile {
+    display: none;
+}
+
+@media (max-width: 1044px) {
+    .mobile {
+        display: block;
+    }
+}
+
 .App {
     text-align: center;
     background-image: linear-gradient(#65b566, #f44f44);
