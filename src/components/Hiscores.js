@@ -8,35 +8,22 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { LoadingScreen } from "./LoadingScreen";
 
 export const Hiscores = () => {
-  const mockData = [
-    {
-      name: "Nikolaas",
-      score: "24",
-    },
-    {
-      name: "Albert",
-      score: "5",
-    },
-    {
-      name: "Jesse",
-      score: "8",
-    },
-    {
-      name: "Fre",
-      score: "100",
-    },
-    {
-      name: "Alex",
-      score: "6",
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  mockData.sort((a, b) => {
-    return b.score - a.score;
-  });
+  useEffect(() => {
+    axios.get("http://localhost:4001/userData").then((res) => {
+      res.data.sort((a, b) => b.score - a.score);
+      setData(res.data);
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
     <Box
       sx={{
@@ -66,34 +53,38 @@ export const Hiscores = () => {
                   fontWeight: "bold",
                 }}
               >
-                <u>Ranking</u>
+                Ranking
               </TableCell>
               <TableCell
                 sx={{
                   fontWeight: "bold",
                 }}
               >
-                <u>Name</u>
+                Name
               </TableCell>
               <TableCell
                 sx={{
                   fontWeight: "bold",
                 }}
               >
-                <u>HighScore</u>
+                Highscore
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {mockData.map((user) => {
-              return (
-                <TableRow key={mockData.indexOf(user) + 1}>
-                  <TableCell>{mockData.indexOf(user) + 1}</TableCell>
-                  <TableCell>{user.name}</TableCell>
-                  <TableCell>{user.score}</TableCell>
-                </TableRow>
-              );
-            })}
+            {isLoading ? (
+              <LoadingScreen />
+            ) : (
+              data.map((user) => {
+                return (
+                  <TableRow key={data.indexOf(user) + 1}>
+                    <TableCell>{data.indexOf(user) + 1}</TableCell>
+                    <TableCell>{user.name}</TableCell>
+                    <TableCell>{user.score}</TableCell>
+                  </TableRow>
+                );
+              })
+            )}
           </TableBody>
         </Table>
       </TableContainer>

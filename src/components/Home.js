@@ -1,89 +1,17 @@
 import { Box } from "@mui/material";
 import React from "react";
+import { TimeLineShows } from "./TimeLineShows";
 
 export const Home = () => {
   return (
     <>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
-      <Box>Home</Box>
+      <Box
+        sx={{
+          minHeight: "90vh",
+        }}
+      >
+        <TimeLineShows />
+      </Box>
     </>
   );
 };
