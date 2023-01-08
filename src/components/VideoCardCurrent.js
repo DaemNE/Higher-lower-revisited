@@ -9,14 +9,12 @@ import {
   Stack,
   Box,
   Avatar,
-  Icon,
-  ImageListItem,
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import CloseIcon from "@mui/icons-material/Close";
-import { Check, Image } from "@mui/icons-material";
+import { Check } from "@mui/icons-material";
 import album1 from "../images/Zwangerschapsverlofv3.jpeg";
 import album2 from "../images/WieIsGuy.jpeg";
 import album3 from "../images/Brutaal.jpeg";
@@ -26,7 +24,6 @@ import album6 from "../images/BABAGUY.jpeg";
 import album7 from "../images/180Remix.webp";
 import album8 from "../images/NietVoorDeViews.jpeg";
 import album9 from "../images/pourriture-noble.jpg";
-import title from "../images/Title.webp";
 import { ModalLostGame } from "./ModalLostGame";
 
 export const VideoCardCurrent = () => {
@@ -257,9 +254,7 @@ export const VideoCardCurrent = () => {
         >
           <CardContent>
             <Typography variant="h3" component={"div"}>
-              <u>
-                <b>"{currentSong.title}"</b>
-              </u>
+              <b>"{currentSong.title}"</b>
             </Typography>
             <Typography>has</Typography>
             <Typography variant="h1" color={"warning.light"}>
@@ -339,9 +334,7 @@ export const VideoCardCurrent = () => {
         >
           <CardContent>
             <Typography variant="h3" component={"div"}>
-              <u>
-                <b>"{nextSong.title}"</b>
-              </u>
+              <b>"{nextSong.title}"</b>
             </Typography>
             <Typography variant="h5">has</Typography>
             <Box

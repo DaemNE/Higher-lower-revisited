@@ -1,32 +1,17 @@
-import {
-  Typography,
-  Paper,
-  ButtonGroup,
-  IconButton,
-  Box,
-  Stack,
-} from "@mui/material";
+import { Typography, Paper, IconButton, Box, Stack } from "@mui/material";
 import React from "react";
 import {
-  FacebookIcon,
   TwitterIcon,
   RedditIcon,
   RedditShareButton,
   TwitterShareButton,
-  FacebookShareButton,
   WhatsappShareButton,
   WhatsappIcon,
   FacebookMessengerShareButton,
   FacebookMessengerIcon,
 } from "react-share";
 
-export const ModalLostGame = ({
-  score,
-  highScore,
-  display,
-  restartGame,
-  shareResults,
-}) => {
+export const ModalLostGame = ({ score, highScore, display, restartGame }) => {
   const quote =
     "Hey, I just got " +
     score +
@@ -37,14 +22,11 @@ export const ModalLostGame = ({
     <Box
       sx={{
         display: display,
-        height: "100vh",
-        width: "100vw",
         justifyContent: "center",
         alignItems: "center",
-        bgcolor: "rgb(255,255,255,0.4)",
         zIndex: 1,
       }}
-      className="smooth-anim-scale-in"
+      className="smooth-anim-bounce-in"
     >
       <Paper
         sx={{
@@ -52,8 +34,9 @@ export const ModalLostGame = ({
           width: "50vw",
           background: "#FFFFFF",
           zIndex: 1,
-          display: "",
           bgcolor: "#E3E3E3",
+          color: "white",
+
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -62,7 +45,7 @@ export const ModalLostGame = ({
           backgroundImage: "linear-gradient(#65b566, #f44f44);",
         }}
       >
-        <Typography variant="h1">You Lost!</Typography>
+        <Typography variant="h2">Better luck next time..</Typography>
         <Typography>Your score: {score}</Typography>
         <Typography>Your highscore: {highScore}</Typography>
         <br />
@@ -73,6 +56,9 @@ export const ModalLostGame = ({
         >
           Play again
         </IconButton>
+
+        <Typography variant="h5">Share your score on</Typography>
+        <br />
         <Stack spacing={4} direction={"row"}>
           <Stack
             sx={{
