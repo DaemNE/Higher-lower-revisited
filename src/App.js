@@ -10,7 +10,9 @@ import { VideoCardCurrent } from "./components/VideoCardCurrent";
 function App() {
   return (
     <>
-      <MobileComponent />
+      <div className="mobile">
+        <MobileComponent />
+      </div>
       <div className="App">
         <NavBar />
         <Routes>
